@@ -4,21 +4,21 @@ from pynput.keyboard import Key, Controller
 
 cam = cv2.VideoCapture(0)
 
-cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-cam.set(cv2.CAP_PROP_FPS, 30)
+cam.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+cam.set(cv2.CAP_PROP_FPS, 60)
 
 fdetector = FaceMeshDetector(minDetectionCon=0.4)
 keyboard = Controller()
 
 _key = Key.space
-_threshold = 0.5
+_threshold = 0.3
 blink_cooldown = 3
 counter = 0
 
 def is_blinking(face, threshold=0.5):
     # factor in the distance of face from camera
-    face_height = faces[0][152][1] - faces[0][10][1]
+    face_height = face[152][1] - face[10][1]
     threshold = 1 - threshold
     threshold *= face_height / 320
     if face_height > 400:
@@ -39,9 +39,8 @@ while True:
     if faces and counter > blink_cooldown:
         if is_blinking(faces[0], threshold=_threshold):
             keyboard.press(_key)
-            counter = 0
-        else:
             keyboard.release(_key)
+            counter = 0
     # cv2.imshow("Livefeed", frame)  # Only enable if you want face display
     counter += 1
 
@@ -49,3 +48,6 @@ while True:
 
     if key == ord("q"):
         break
+
+cam.release()
+cv2.destroyAllWindows()
