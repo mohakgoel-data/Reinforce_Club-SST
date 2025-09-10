@@ -14,6 +14,8 @@ When a blink is detected, the script uses the **pyautogui** library to simulate 
 
 ## Prerequisites
 
+Python version: 3.10 (update the .python-version file if necessary)
+
 Before running the script, you need to install the following libraries:
 
 * **cvzone**: A computer vision library built on top of OpenCV.
