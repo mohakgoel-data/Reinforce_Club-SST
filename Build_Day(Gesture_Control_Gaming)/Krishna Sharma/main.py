@@ -1,6 +1,6 @@
 import cv2
 from cvzone.FaceMeshModule import FaceMeshDetector
-import pyautogui
+from pynput.keyboard import Key, Controller
 
 cam = cv2.VideoCapture(0)
 
@@ -9,8 +9,10 @@ cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 cam.set(cv2.CAP_PROP_FPS, 30)
 
 fdetector = FaceMeshDetector(minDetectionCon=0.4)
+keyboard = Controller()
 
-_key = "space"
+_key = Key.space
+_threshold = 0.5
 blink_cooldown = 3
 counter = 0
 
@@ -35,11 +37,11 @@ while True:
     frame, faces = fdetector.findFaceMesh(frame, True)
 
     if faces and counter > blink_cooldown:
-        if is_blinking(faces[0], threshold=0.4):
-            pyautogui.keyDown(_key)
+        if is_blinking(faces[0], threshold=_threshold):
+            keyboard.press(_key)
             counter = 0
         else:
-            pyautogui.keyUp(_key)
+            keyboard.release(_key)
     # cv2.imshow("Livefeed", frame)  # Only enable if you want face display
     counter += 1
 
