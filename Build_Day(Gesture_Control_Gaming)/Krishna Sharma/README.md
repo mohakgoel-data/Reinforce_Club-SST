@@ -10,7 +10,7 @@ The script uses a **Face Mesh Detector** to identify over 400 points on the face
 
 A key feature of this script is its ability to adapt to the user's distance from the camera. It calculates the height of the face in the camera frame and uses this to adjust the blink detection threshold. This means the system will work reliably whether you are close to the screen or sitting further away.
 
-When a blink is detected, the script uses the **pyautogui** library to simulate a keyboard press (the spacebar by default), providing a seamless control experience.
+When a blink is detected, the script uses the **pynput** library to simulate a keyboard press (the spacebar by default), providing a seamless control experience.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ Before running the script, you need to install the following libraries:
 
 * **mediapipe**: Used by cvzone for face mesh detection.
 
-* **pyautogui**: For controlling the mouse and keyboard.
+* **pynput**: For sending keystrokes.
 
 You can install all of them using uv
 
@@ -35,7 +35,7 @@ uv sync
 Alternatively, you can use pip:
 
 ```
-pip install cvzone opencv-python mediapipe pyautogui
+pip install cvzone opencv-python mediapipe pynput
 ```
  
 ## Usage
@@ -62,9 +62,9 @@ python main.py
 
 The script can be easily customized to suit your needs:
 
-* **Change the control key:** Modify the `_key` variable to use a different keyboard key. For example, to use the 'up' arrow key, change the line to `_key = "up"`.
+* **Change the control key:** Modify the `_key` variable to use a different keyboard key. For example, to use the 'up' arrow key, change the line to `_key = Key.up`.
 
-* **Adjust blink sensitivity:** The `threshold` parameter in the `is_blinking` function controls the blink sensitivity. You can experiment with different values if the detection is too sensitive or not sensitive enough.
+* **Adjust blink sensitivity:** The `_threshold` parameter controls the blink sensitivity. You can experiment with different values if the detection is too sensitive or not sensitive enough.
 
 * **Display the live camera feed:** The line `cv2.imshow("Livefeed", frame)` is commented out. If you want to see what the camera is detecting, you can uncomment this line.
 
