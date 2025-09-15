@@ -5,6 +5,8 @@ from cvzone.HandTrackingModule import HandDetector
 import pyautogui
 import time
 
+# NOTE: This program can also be used to play chrome Dino!! 
+
 # Initialize Hand Detector
 detector = HandDetector(detectionCon=0.85, maxHands=1)
 
