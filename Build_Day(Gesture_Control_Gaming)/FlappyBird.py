@@ -16,7 +16,7 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)  # Lower resolution for faster processing
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 
 last_press_time = 0
-press_cooldown = 1.0  # seconds
+press_cooldown = 0.5  # seconds
 
 while True:
     success, frame = cap.read()
